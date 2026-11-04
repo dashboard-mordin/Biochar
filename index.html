@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการเกิดถ่านชีวภาพ</title>
+    <title>การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการผลิตถ่านชีวภาพ</title>
     
     <!-- CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,7 +41,7 @@
 
             <hr class="border-emerald-100">
 
-            <!-- 2. เลือกจังหวัด (Custom Dropdown มีช่องค้นหาด้านใน) -->
+            <!-- 2. เลือกจังหวัด -->
             <div>
                 <label class="block text-sm font-bold text-gray-700 mb-1.5">📍 เลือกจังหวัด:</label>
                 
@@ -55,7 +55,7 @@
                     <!-- กล่องตัวเลือก Dropdown (ซ่อนอยู่) -->
                     <div id="customDropdownMenu" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-80 flex flex-col overflow-hidden">
                         
-                        <!-- ช่องพิมพ์ค้นหา (อยู่ด้านใน ก่อนรายชื่อ) -->
+                        <!-- ช่องพิมพ์ค้นหา -->
                         <div class="p-2 border-b border-gray-200 bg-gray-50">
                             <input type="text" id="innerProvinceSearch" placeholder="🔍 พิมพ์เพื่อค้นหาจังหวัด..." class="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500 outline-none shadow-inner">
                         </div>
@@ -92,7 +92,7 @@
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-white">
             <div>
                 <h1 class="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-700">
-                    การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการเกิดถ่านชีวภาพ
+                    การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการผลิตถ่านชีวภาพ
                 </h1>
                 <p class="text-gray-600 mt-2 text-lg">
                     พืช: <span id="currentCropLabel" class="font-bold text-teal-600 bg-teal-100 px-3 py-1 rounded-full">กำลังโหลด...</span> 
@@ -108,7 +108,7 @@
             </div>
         </div>
 
-        <!-- Section 1: ข้อมูลสรุป (Summary Cards) -->
+        <!-- Section 1: ข้อมูลสรุป (Summary Cards) แถวบน: วัสดุเหลือใช้ -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-gradient-to-br from-emerald-400 to-teal-600 rounded-2xl p-6 shadow-lg text-white hover-card">
                 <p id="cardTitleTotal" class="text-emerald-100 text-sm font-semibold mb-1">ปริมาณวัสดุเหลือใช้รวมทั้งประเทศ</p>
@@ -123,6 +123,24 @@
                 <p id="cardTitleMin" class="text-blue-100 text-sm font-semibold mb-1">จังหวัดที่มีปริมาณน้อยที่สุด</p>
                 <h3 id="sumMinName" class="text-2xl font-bold drop-shadow-md">-</h3>
                 <p id="sumMinValue" class="text-indigo-100 mt-1">0 ตัน</p>
+            </div>
+        </div>
+
+        <!-- Section 1.5: ข้อมูลสรุป (Summary Cards) แถวล่าง: ไบโอชาร์ -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-6 shadow-lg text-white hover-card">
+                <p id="cardTitleBiocharTotal" class="text-amber-100 text-sm font-semibold mb-1">ปริมาณไบโอชาร์รวมทั้งประเทศ</p>
+                <h3 id="sumBiocharTotal" class="text-3xl font-bold drop-shadow-md">0 <span class="text-xl font-normal">ตัน</span></h3>
+            </div>
+            <div class="bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl p-6 shadow-lg text-white hover-card">
+                <p id="cardTitleBiocharMax" class="text-rose-100 text-sm font-semibold mb-1">จังหวัดที่ผลิตไบโอชาร์สูงสุดอันดับ 1</p>
+                <h3 id="sumBiocharMaxName" class="text-2xl font-bold drop-shadow-md">-</h3>
+                <p id="sumBiocharMaxValue" class="text-red-100 mt-1">0 ตัน</p>
+            </div>
+            <div class="bg-gradient-to-br from-fuchsia-400 to-purple-600 rounded-2xl p-6 shadow-lg text-white hover-card">
+                <p id="cardTitleBiocharMin" class="text-fuchsia-100 text-sm font-semibold mb-1">จังหวัดที่ผลิตไบโอชาร์น้อยที่สุด</p>
+                <h3 id="sumBiocharMinName" class="text-2xl font-bold drop-shadow-md">-</h3>
+                <p id="sumBiocharMinValue" class="text-purple-100 mt-1">0 ตัน</p>
             </div>
         </div>
 
@@ -162,7 +180,7 @@
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-2xl">🔥</span>
-                    <h2 class="text-xl font-bold text-gray-800">อัตราการเกิดไบโอชาร์</h2>
+                    <h2 class="text-xl font-bold text-gray-800">อัตราการผลิตไบโอชาร์ (15 จังหวัดสูงสุด)</h2>
                 </div>
                 <div class="relative h-[300px] w-full">
                     <canvas id="biocharChart"></canvas>
@@ -235,7 +253,6 @@
 
         // ระบบ Sidebar (Custom Dropdown)
         function initSidebar() {
-            // Dropdown พืช
             const cropSelect = document.getElementById('cropSelect');
             cropSelect.innerHTML = '';
             cropMenus.forEach(crop => {
@@ -254,7 +271,6 @@
                 fetchDataAndRender(selectedCrop);
             };
 
-            // Custom Dropdown ค้นหาจังหวัด
             const dropdownBtn = document.getElementById('customDropdownBtn');
             const dropdownMenu = document.getElementById('customDropdownMenu');
             const dropdownLabel = document.getElementById('customDropdownLabel');
@@ -288,7 +304,6 @@
 
             populateCustomProvinceDropdown('');
 
-            // ปุ่มล้างค่า
             document.getElementById('btnResetView').onclick = () => {
                 selectedProvince = null;
                 dropdownLabel.textContent = '-- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --';
@@ -361,10 +376,13 @@
             const result = dataCache[currentCrop.sheet];
             const regions = result.regions || [];
             const residueTypes = result.residueTypes || [];
-
             const viewLabel = document.getElementById('currentViewLabel');
+            
+            // ข้อมูลสำหรับไบโอชาร์เรียงจากมากไปน้อย
+            const biocharSortedDesc = [...currentRawData].sort((a, b) => b.Biochar - a.Biochar);
 
             if (selectedProvince) {
+                // โหมดเจาะลึกรายจังหวัด
                 viewLabel.textContent = `จังหวัด: ${selectedProvince}`;
                 viewLabel.className = "font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full";
 
@@ -374,26 +392,46 @@
                     return;
                 }
 
+                // 1. การ์ดแถวบน: วัสดุเหลือใช้
                 document.getElementById('cardTitleTotal').textContent = `ปริมาณวัสดุเหลือใช้ของจังหวัด ${selectedProvince}`;
                 document.getElementById('sumTotal').innerHTML = `${provData.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
                 
-                document.getElementById('cardTitleMax').textContent = `อันดับเทียบกับประเทศ`;
-                const rank = currentRawData.findIndex(i => i.Province === selectedProvince) + 1;
-                document.getElementById('sumMaxName').textContent = rank > 0 ? `อันดับที่ ${rank}` : "ไม่มีข้อมูล";
+                document.getElementById('cardTitleMax').textContent = `อันดับปริมาณวัสดุเหลือใช้ (เทียบประเทศ)`;
+                const rankResidue = currentRawData.findIndex(i => i.Province === selectedProvince) + 1;
+                document.getElementById('sumMaxName').textContent = rankResidue > 0 ? `อันดับที่ ${rankResidue}` : "ไม่มีข้อมูล";
                 document.getElementById('sumMaxValue').textContent = `จาก 77 จังหวัด`;
 
-                document.getElementById('cardTitleMin').textContent = `ปริมาณไบโอชาร์ที่ผลิตได้`;
-                document.getElementById('sumMinName').textContent = `${provData.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
-                document.getElementById('sumMinValue').textContent = `อัตราการเกิดไบโอชาร์`;
+                const countryTotalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
+                const residuePct = countryTotalResidue > 0 ? (provData.TotalResidue / countryTotalResidue * 100).toFixed(2) : 0;
+                document.getElementById('cardTitleMin').textContent = `สัดส่วนวัสดุเหลือใช้เทียบกับทั้งประเทศ`;
+                document.getElementById('sumMinName').textContent = `${residuePct}%`;
+                document.getElementById('sumMinValue').textContent = `ของปริมาณทั่วประเทศ`;
+
+                // 2. การ์ดแถวล่าง: ไบโอชาร์
+                document.getElementById('cardTitleBiocharTotal').textContent = `ปริมาณไบโอชาร์ของจังหวัด ${selectedProvince}`;
+                document.getElementById('sumBiocharTotal').innerHTML = `${provData.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
+                
+                document.getElementById('cardTitleBiocharMax').textContent = `อันดับปริมาณไบโอชาร์ (เทียบประเทศ)`;
+                const rankBiochar = biocharSortedDesc.findIndex(i => i.Province === selectedProvince) + 1;
+                document.getElementById('sumBiocharMaxName').textContent = rankBiochar > 0 ? `อันดับที่ ${rankBiochar}` : "ไม่มีข้อมูล";
+                document.getElementById('sumBiocharMaxValue').textContent = `จาก 77 จังหวัด`;
+
+                const countryTotalBiochar = currentRawData.reduce((sum, item) => sum + item.Biochar, 0);
+                const biocharPct = countryTotalBiochar > 0 ? (provData.Biochar / countryTotalBiochar * 100).toFixed(2) : 0;
+                document.getElementById('cardTitleBiocharMin').textContent = `สัดส่วนไบโอชาร์เทียบกับทั้งประเทศ`;
+                document.getElementById('sumBiocharMinName').textContent = `${biocharPct}%`;
+                document.getElementById('sumBiocharMinValue').textContent = `อัตราการผลิตไบโอชาร์`;
 
                 renderSingleProvinceStacked(provData, residueTypes);
                 renderRegionChart(regions);
                 renderBiocharChart([provData.Province], [provData.Biochar]);
 
             } else {
+                // โหมดภาพรวมทั้งประเทศ
                 viewLabel.textContent = "ภาพรวมทั้งประเทศ";
                 viewLabel.className = "font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full";
 
+                // 1. การ์ดแถวบน: วัสดุเหลือใช้
                 document.getElementById('cardTitleTotal').textContent = "ปริมาณวัสดุเหลือใช้รวมทั้งประเทศ";
                 document.getElementById('cardTitleMax').textContent = "จังหวัดที่มีปริมาณสูงสุดอันดับ 1";
                 document.getElementById('cardTitleMin').textContent = "จังหวัดที่มีปริมาณน้อยที่สุด";
@@ -405,12 +443,24 @@
                 document.getElementById('sumMinName').textContent = currentRawData[currentRawData.length - 1].Province;
                 document.getElementById('sumMinValue').textContent = `${currentRawData[currentRawData.length - 1].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
 
+                // 2. การ์ดแถวล่าง: ไบโอชาร์
+                document.getElementById('cardTitleBiocharTotal').textContent = "ปริมาณไบโอชาร์รวมทั้งประเทศ";
+                document.getElementById('cardTitleBiocharMax').textContent = "จังหวัดที่ผลิตไบโอชาร์สูงสุดอันดับ 1";
+                document.getElementById('cardTitleBiocharMin').textContent = "จังหวัดที่ผลิตไบโอชาร์น้อยที่สุด";
+
+                const totalBiochar = currentRawData.reduce((sum, item) => sum + item.Biochar, 0);
+                document.getElementById('sumBiocharTotal').innerHTML = `${totalBiochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
+                document.getElementById('sumBiocharMaxName').textContent = biocharSortedDesc[0].Province;
+                document.getElementById('sumBiocharMaxValue').textContent = `${biocharSortedDesc[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                document.getElementById('sumBiocharMinName').textContent = biocharSortedDesc[biocharSortedDesc.length - 1].Province;
+                document.getElementById('sumBiocharMinValue').textContent = `${biocharSortedDesc[biocharSortedDesc.length - 1].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+
                 const top10 = currentRawData.slice(0, 10);
                 renderStackedChart(top10, residueTypes);
                 renderRegionChart(regions);
 
-                const biocharSorted = [...currentRawData].sort((a, b) => b.Biochar - a.Biochar).slice(0, 15);
-                renderBiocharChart(biocharSorted.map(i => i.Province), biocharSorted.map(i => i.Biochar));
+                const top15Biochar = biocharSortedDesc.slice(0, 15);
+                renderBiocharChart(top15Biochar.map(i => i.Province), top15Biochar.map(i => i.Biochar));
             }
 
             updateMap(currentRawData);
@@ -516,7 +566,6 @@
             });
         }
 
-        // อัปเดตแผนที่
         function updateMap(data) {
             markersGroup.clearLayers();
             
@@ -534,7 +583,7 @@
                                             <span style="color: #6b7280; font-size: 13px;">ปริมาณวัสดุเหลือใช้:</span><br>
                                             <span style="color: #059669; font-weight: bold; font-size: 15px;">${item.TotalResidue.toLocaleString()} ตัน</span><br>
                                             <hr style="margin: 6px 0; border-color: #e5e7eb;">
-                                            <span style="color: #6b7280; font-size: 13px;">อัตราการเกิดไบโอชาร์:</span><br>
+                                            <span style="color: #6b7280; font-size: 13px;">อัตราการผลิตไบโอชาร์:</span><br>
                                             <span style="color: #ea580c; font-weight: bold; font-size: 14px;">${item.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน</span>
                                           </div>`;
                     
