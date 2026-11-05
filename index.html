@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการผลิตถ่านชีวภาพ</title>
+    <title>การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละศักยภาพทางการผลิตถ่านชีวภาพ</title>
     
     <!-- CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -41,32 +41,42 @@
 
             <hr class="border-emerald-100">
 
-            <!-- 2. เลือกจังหวัด -->
+            <!-- 2. Dropdown เลือกภูมิภาค -->
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1.5">🗺️ เลือกภูมิภาค:</label>
+                <select id="regionSelect" class="w-full bg-blue-50 border border-blue-300 text-blue-900 font-semibold text-base rounded-xl p-3 focus:ring-blue-500 focus:border-blue-500 shadow-sm cursor-pointer">
+                    <option value="">-- ภาพรวมทุกภูมิภาค (ทั่วประเทศ) --</option>
+                    <option value="ภาคเหนือ">ภาคเหนือ</option>
+                    <option value="ภาคตะวันออกเฉียงเหนือ">ภาคตะวันออกเฉียงเหนือ</option>
+                    <option value="ภาคกลาง">ภาคกลาง</option>
+                    <option value="ภาคตะวันออก">ภาคตะวันออก</option>
+                    <option value="ภาคตะวันตก">ภาคตะวันตก</option>
+                    <option value="ภาคใต้">ภาคใต้</option>
+                </select>
+            </div>
+
+            <hr class="border-emerald-100">
+
+            <!-- 3. เลือกจังหวัด -->
             <div>
                 <label class="block text-sm font-bold text-gray-700 mb-1.5">📍 เลือกจังหวัด:</label>
                 
                 <div class="relative w-full" id="customDropdownContainer">
-                    <!-- ปุ่มกด Dropdown -->
                     <button id="customDropdownBtn" class="w-full bg-white border border-gray-300 text-gray-900 font-medium text-base rounded-xl p-3 flex justify-between items-center shadow-sm hover:border-emerald-400 focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
-                        <span id="customDropdownLabel" class="truncate">-- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --</span>
+                        <span id="customDropdownLabel" class="truncate">-- ภาพรวมทุกจังหวัด --</span>
                         <svg class="w-5 h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
 
-                    <!-- กล่องตัวเลือก Dropdown (ซ่อนอยู่) -->
                     <div id="customDropdownMenu" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-80 flex flex-col overflow-hidden">
-                        
-                        <!-- ช่องพิมพ์ค้นหา -->
                         <div class="p-2 border-b border-gray-200 bg-gray-50">
                             <input type="text" id="innerProvinceSearch" placeholder="🔍 พิมพ์เพื่อค้นหาจังหวัด..." class="w-full bg-white border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500 outline-none shadow-inner">
                         </div>
-                        
-                        <!-- รายการตัวเลือก -->
                         <div class="overflow-y-auto sidebar-scroll">
                             <div id="optAllProvinces" class="p-3 hover:bg-emerald-50 cursor-pointer border-b border-gray-200 font-bold text-emerald-700 text-sm bg-emerald-50/50">
-                                -- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --
+                                -- ภาพรวมทุกจังหวัด --
                             </div>
                             <div id="dropdownProvinceList">
-                                <!-- รายชื่อจังหวัดสร้างผ่าน JS -->
+                                <!-- สร้างผ่าน JS -->
                             </div>
                         </div>
                     </div>
@@ -74,11 +84,11 @@
             </div>
 
             <!-- ปุ่มล้างค่า -->
-            <button id="btnResetView" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2.5 px-4 rounded-xl shadow transition duration-200 text-sm flex items-center justify-center gap-2">
-                ล้างค่า
+            <button id="btnResetView" class="w-full mt-2 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2.5 px-4 rounded-xl shadow transition duration-200 text-sm flex items-center justify-center gap-2">
+                ล้างค่าตัวกรอง
             </button>
 
-            <!-- ปุ่มสำหรับโหลดไฟล์ Excel -->
+            <!-- ปุ่มดาวน์โหลด Excel -->
             <a href="วิเคราะห์วัสดุเหลือใช้ทางการเกษตร ใช้.xlsx" download class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2.5 px-4 rounded-xl shadow transition duration-200 text-sm flex items-center justify-center gap-2 text-center">
                 📥 ดาวน์โหลดไฟล์ Excel ข้อมูล
             </a>
@@ -92,7 +102,7 @@
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-white">
             <div>
                 <h1 class="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-700">
-                    การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละอัตราการผลิตถ่านชีวภาพ
+                    การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละศักยภาพทางการผลิตถ่านชีวภาพ
                 </h1>
                 <p class="text-gray-600 mt-2 text-lg">
                     พืช: <span id="currentCropLabel" class="font-bold text-teal-600 bg-teal-100 px-3 py-1 rounded-full">กำลังโหลด...</span> 
@@ -108,44 +118,40 @@
             </div>
         </div>
 
-        <!-- Section 1: ข้อมูลสรุป (Summary Cards) แถวบน: วัสดุเหลือใช้ -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-gradient-to-br from-emerald-400 to-teal-600 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleTotal" class="text-emerald-100 text-sm font-semibold mb-1">ปริมาณวัสดุเหลือใช้รวมทั้งประเทศ</p>
-                <h3 id="sumTotal" class="text-3xl font-bold drop-shadow-md">0 <span class="text-xl font-normal">ตัน</span></h3>
+        <!-- Section 1: ข้อมูลสรุป (ยุบเหลือ 4 การ์ดใน 1 แถว) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- 1. คาดการณ์ปริมาณวัสดุเหลือใช้ -->
+            <div class="bg-gradient-to-br from-emerald-400 to-teal-600 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
+                <p id="cardTitleTotal" class="text-emerald-100 text-sm font-semibold mb-2">คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวมทั้งประเทศ</p>
+                <h3 id="sumTotal" class="text-2xl lg:text-3xl font-bold drop-shadow-md">0 <span class="text-lg font-normal">ตัน</span></h3>
             </div>
-            <div class="bg-gradient-to-br from-orange-400 to-rose-500 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleMax" class="text-orange-100 text-sm font-semibold mb-1">จังหวัดที่มีปริมาณสูงสุดอันดับ 1</p>
-                <h3 id="sumMaxName" class="text-2xl font-bold drop-shadow-md">-</h3>
-                <p id="sumMaxValue" class="text-rose-100 mt-1">0 ตัน</p>
+            
+            <!-- 2. คาดการณ์ศักยภาพถ่านชีวภาพ -->
+            <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
+                <p id="cardTitleBiocharTotal" class="text-amber-100 text-sm font-semibold mb-2">คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวมทั้งประเทศ</p>
+                <h3 id="sumBiocharTotal" class="text-2xl lg:text-3xl font-bold drop-shadow-md">0 <span class="text-lg font-normal">ตัน</span></h3>
             </div>
-            <div class="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleMin" class="text-blue-100 text-sm font-semibold mb-1">จังหวัดที่มีปริมาณน้อยที่สุด</p>
-                <h3 id="sumMinName" class="text-2xl font-bold drop-shadow-md">-</h3>
-                <p id="sumMinValue" class="text-indigo-100 mt-1">0 ตัน</p>
+
+            <!-- 3. อันดับปริมาณสูงสุด / อันดับของจังหวัด -->
+            <div class="bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
+                <p id="cardTitleRank" class="text-rose-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณสูงสุดอันดับ 1</p>
+                <h3 id="sumRankName" class="text-2xl font-bold drop-shadow-md">-</h3>
+                <p id="sumRankValue" class="text-red-50 mt-1 text-sm leading-relaxed whitespace-pre-line"></p>
             </div>
+
+            <!-- 4. ปริมาณน้อยที่สุด / สัดส่วนเปอร์เซ็นต์ -->
+            <div class="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
+                <p id="cardTitleMinPct" class="text-blue-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณน้อยที่สุด</p>
+                <h3 id="sumMinPctName" class="text-2xl font-bold drop-shadow-md">-</h3>
+                <p id="sumMinPctValue" class="text-indigo-50 mt-1 text-sm leading-relaxed whitespace-pre-line"></p>
+            </div>
+            
         </div>
 
-        <!-- Section 1.5: ข้อมูลสรุป (Summary Cards) แถวล่าง: ไบโอชาร์ -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleBiocharTotal" class="text-amber-100 text-sm font-semibold mb-1">ปริมาณไบโอชาร์รวมทั้งประเทศ</p>
-                <h3 id="sumBiocharTotal" class="text-3xl font-bold drop-shadow-md">0 <span class="text-xl font-normal">ตัน</span></h3>
-            </div>
-            <div class="bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleBiocharMax" class="text-rose-100 text-sm font-semibold mb-1">จังหวัดที่ผลิตไบโอชาร์สูงสุดอันดับ 1</p>
-                <h3 id="sumBiocharMaxName" class="text-2xl font-bold drop-shadow-md">-</h3>
-                <p id="sumBiocharMaxValue" class="text-red-100 mt-1">0 ตัน</p>
-            </div>
-            <div class="bg-gradient-to-br from-fuchsia-400 to-purple-600 rounded-2xl p-6 shadow-lg text-white hover-card">
-                <p id="cardTitleBiocharMin" class="text-fuchsia-100 text-sm font-semibold mb-1">จังหวัดที่ผลิตไบโอชาร์น้อยที่สุด</p>
-                <h3 id="sumBiocharMinName" class="text-2xl font-bold drop-shadow-md">-</h3>
-                <p id="sumBiocharMinValue" class="text-purple-100 mt-1">0 ตัน</p>
-            </div>
-        </div>
-
-        <!-- Section 2: กราฟแท่งแบบซ้อน และ แผนที่ -->
+        <!-- Section 2: กราฟแท่งแบบซ้อน และ กราฟถ่านชีวภาพ -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- ซ้ายบน: กราฟแท่งซ้อนวัสดุเหลือใช้ -->
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-2xl">📊</span>
@@ -156,35 +162,39 @@
                 </div>
             </div>
 
+            <!-- ขวาบน: กราฟแท่งแนวตั้งถ่านชีวภาพ -->
+            <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-2xl">🔥</span>
+                    <h2 class="text-xl font-bold text-gray-800">ศักยภาพทางการผลิตถ่านชีวภาพ (15 จังหวัดสูงสุด)</h2>
+                </div>
+                <div class="relative h-[350px] w-full">
+                    <canvas id="biocharChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: กราฟวงกลมภูมิภาค และ แผนที่ -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
+            <!-- ซ้ายล่าง: กราฟโดนัทภูมิภาค -->
+            <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
+                <div class="flex items-center gap-2 mb-4">
+                    <!-- เปลี่ยนโดนัทเป็นลูกโลก -->
+                    <span class="text-2xl">🌏</span>
+                    <h2 class="text-xl font-bold text-gray-800">สัดส่วนปริมาณวัสดุเหลือใช้แยกตามภูมิภาค</h2>
+                </div>
+                <div class="relative h-[350px] w-full flex justify-center">
+                    <canvas id="regionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- ขวาล่าง: แผนที่ -->
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card flex flex-col">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-2xl">🗺️</span>
                     <h2 class="text-xl font-bold text-gray-800">แผนที่การกระจายตัว</h2>
                 </div>
-                <div id="map" class="flex-1 shadow-inner"></div>
-            </div>
-        </div>
-
-        <!-- Section 3: กราฟวงกลมภูมิภาค และ กราฟไบโอชาร์ -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
-            <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-2xl">🍩</span>
-                    <h2 class="text-xl font-bold text-gray-800">สัดส่วนปริมาณวัสดุเหลือใช้แยกตามภูมิภาค</h2>
-                </div>
-                <div class="relative h-[300px] w-full flex justify-center">
-                    <canvas id="regionChart"></canvas>
-                </div>
-            </div>
-
-            <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-2xl">🔥</span>
-                    <h2 class="text-xl font-bold text-gray-800">อัตราการผลิตไบโอชาร์ (15 จังหวัดสูงสุด)</h2>
-                </div>
-                <div class="relative h-[300px] w-full">
-                    <canvas id="biocharChart"></canvas>
-                </div>
+                <div id="map" class="flex-1 shadow-inner h-[350px]"></div>
             </div>
         </div>
 
@@ -199,6 +209,7 @@
         
         let stackedChart = null, regionChart = null, biocharChart = null, map = null, markersGroup = null;
         let currentRawData = null;
+        let selectedRegion = null;
         let selectedProvince = null;
         let currentCrop = null;
         const dataCache = {};
@@ -213,6 +224,16 @@
             { id: 'ข้าวโพด', name: 'ข้าวโพด', icon: '🌽', sheet: 'ข้าวโพด' },
             { id: 'ยางพารา', name: 'ยางพารา', icon: '🌳', sheet: 'ยางพารา' }
         ];
+
+        // ฐานข้อมูลภูมิภาคอ้างอิง
+        const provinceRegions = {
+            "เชียงใหม่": "ภาคเหนือ", "เชียงราย": "ภาคเหนือ", "น่าน": "ภาคเหนือ", "พะเยา": "ภาคเหนือ", "แพร่": "ภาคเหนือ", "แม่ฮ่องสอน": "ภาคเหนือ", "ลำปาง": "ภาคเหนือ", "ลำพูน": "ภาคเหนือ", "อุตรดิตถ์": "ภาคเหนือ",
+            "กาฬสินธุ์": "ภาคตะวันออกเฉียงเหนือ", "ขอนแก่น": "ภาคตะวันออกเฉียงเหนือ", "ชัยภูมิ": "ภาคตะวันออกเฉียงเหนือ", "นครพนม": "ภาคตะวันออกเฉียงเหนือ", "นครราชสีมา": "ภาคตะวันออกเฉียงเหนือ", "บึงกาฬ": "ภาคตะวันออกเฉียงเหนือ", "บุรีรัมย์": "ภาคตะวันออกเฉียงเหนือ", "มหาสารคาม": "ภาคตะวันออกเฉียงเหนือ", "มุกดาหาร": "ภาคตะวันออกเฉียงเหนือ", "ยโสธร": "ภาคตะวันออกเฉียงเหนือ", "ร้อยเอ็ด": "ภาคตะวันออกเฉียงเหนือ", "เลย": "ภาคตะวันออกเฉียงเหนือ", "สกลนคร": "ภาคตะวันออกเฉียงเหนือ", "สุรินทร์": "ภาคตะวันออกเฉียงเหนือ", "ศรีสะเกษ": "ภาคตะวันออกเฉียงเหนือ", "หนองคาย": "ภาคตะวันออกเฉียงเหนือ", "หนองบัวลำภู": "ภาคตะวันออกเฉียงเหนือ", "อุดรธานี": "ภาคตะวันออกเฉียงเหนือ", "อุบลราชธานี": "ภาคตะวันออกเฉียงเหนือ", "อำนาจเจริญ": "ภาคตะวันออกเฉียงเหนือ",
+            "กรุงเทพมหานคร": "ภาคกลาง", "กำแพงเพชร": "ภาคกลาง", "ชัยนาท": "ภาคกลาง", "นครนายก": "ภาคกลาง", "นครปฐม": "ภาคกลาง", "นครสวรรค์": "ภาคกลาง", "นนทบุรี": "ภาคกลาง", "ปทุมธานี": "ภาคกลาง", "พระนครศรีอยุธยา": "ภาคกลาง", "พิจิตร": "ภาคกลาง", "พิษณุโลก": "ภาคกลาง", "เพชรบูรณ์": "ภาคกลาง", "ลพบุรี": "ภาคกลาง", "สมุทรปราการ": "ภาคกลาง", "สมุทรสงคราม": "ภาคกลาง", "สมุทรสาคร": "ภาคกลาง", "สระบุรี": "ภาคกลาง", "สิงห์บุรี": "ภาคกลาง", "สุโขทัย": "ภาคกลาง", "สุพรรณบุรี": "ภาคกลาง", "อ่างทอง": "ภาคกลาง", "อุทัยธานี": "ภาคกลาง",
+            "จันทบุรี": "ภาคตะวันออก", "ฉะเชิงเทรา": "ภาคตะวันออก", "ชลบุรี": "ภาคตะวันออก", "ตราด": "ภาคตะวันออก", "ปราจีนบุรี": "ภาคตะวันออก", "ระยอง": "ภาคตะวันออก", "สระแก้ว": "ภาคตะวันออก",
+            "กาญจนบุรี": "ภาคตะวันตก", "ตาก": "ภาคตะวันตก", "ประจวบคีรีขันธ์": "ภาคตะวันตก", "เพชรบุรี": "ภาคตะวันตก", "ราชบุรี": "ภาคตะวันตก",
+            "กระบี่": "ภาคใต้", "ชุมพร": "ภาคใต้", "ตรัง": "ภาคใต้", "นครศรีธรรมราช": "ภาคใต้", "นราธิวาส": "ภาคใต้", "ปัตตานี": "ภาคใต้", "พังงา": "ภาคใต้", "พัทลุง": "ภาคใต้", "ภูเก็ต": "ภาคใต้", "ยะลา": "ภาคใต้", "ระนอง": "ภาคใต้", "สงขลา": "ภาคใต้", "สตูล": "ภาคใต้", "สุราษฎร์ธานี": "ภาคใต้"
+        };
 
         const provinceCoords = {
             "กรุงเทพมหานคร": [13.7563, 100.5018], "สมุทรปราการ": [13.5993, 100.5968], "นนทบุรี": [13.8591, 100.5217],
@@ -251,7 +272,6 @@
             markersGroup = L.layerGroup().addTo(map);
         }
 
-        // ระบบ Sidebar (Custom Dropdown)
         function initSidebar() {
             const cropSelect = document.getElementById('cropSelect');
             cropSelect.innerHTML = '';
@@ -265,10 +285,39 @@
             cropSelect.onchange = (e) => {
                 const selectedCrop = cropMenus.find(c => c.id === e.target.value);
                 selectedProvince = null;
+                selectedRegion = null;
+                document.getElementById('regionSelect').value = "";
                 document.getElementById('customDropdownLabel').textContent = '-- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --';
                 document.getElementById('innerProvinceSearch').value = '';
                 populateCustomProvinceDropdown('');
                 fetchDataAndRender(selectedCrop);
+            };
+
+            const regionSelect = document.getElementById('regionSelect');
+            regionSelect.onchange = (e) => {
+                selectedRegion = e.target.value ? e.target.value : null;
+                selectedProvince = null; 
+                
+                document.getElementById('customDropdownLabel').textContent = '-- ภาพรวมทุกจังหวัด --';
+                document.getElementById('innerProvinceSearch').value = '';
+                populateCustomProvinceDropdown('');
+                renderDashboard();
+                
+                if (selectedRegion) {
+                    let lats = [], lngs = [];
+                    Object.keys(provinceCoords).forEach(p => {
+                        if (provinceRegions[p] === selectedRegion) {
+                            lats.push(provinceCoords[p][0]);
+                            lngs.push(provinceCoords[p][1]);
+                        }
+                    });
+                    if (lats.length > 0) {
+                        let bounds = [ [Math.min(...lats), Math.min(...lngs)], [Math.max(...lats), Math.max(...lngs)] ];
+                        map.fitBounds(bounds, {padding: [30, 30]});
+                    }
+                } else {
+                    map.setView([13.5, 100.5], 6);
+                }
             };
 
             const dropdownBtn = document.getElementById('customDropdownBtn');
@@ -296,16 +345,30 @@
 
             document.getElementById('optAllProvinces').onclick = () => {
                 selectedProvince = null;
-                dropdownLabel.textContent = '-- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --';
+                dropdownLabel.textContent = '-- ภาพรวมทุกจังหวัด --';
                 dropdownMenu.classList.add('hidden');
                 renderDashboard();
-                map.setView([13.5, 100.5], 6);
+                
+                if (selectedRegion) {
+                    let lats = [], lngs = [];
+                    Object.keys(provinceCoords).forEach(p => {
+                        if (provinceRegions[p] === selectedRegion) {
+                            lats.push(provinceCoords[p][0]);
+                            lngs.push(provinceCoords[p][1]);
+                        }
+                    });
+                    if (lats.length > 0) map.fitBounds([ [Math.min(...lats), Math.min(...lngs)], [Math.max(...lats), Math.max(...lngs)] ], {padding: [30, 30]});
+                } else {
+                    map.setView([13.5, 100.5], 6);
+                }
             };
 
             populateCustomProvinceDropdown('');
 
             document.getElementById('btnResetView').onclick = () => {
                 selectedProvince = null;
+                selectedRegion = null;
+                document.getElementById('regionSelect').value = '';
                 dropdownLabel.textContent = '-- ภาพรวมทุกจังหวัด (ทั่วประเทศ) --';
                 innerSearch.value = '';
                 populateCustomProvinceDropdown('');
@@ -320,12 +383,18 @@
             const sortedProvinces = Object.keys(provinceCoords).sort();
             
             sortedProvinces.forEach(prov => {
+                if (selectedRegion && provinceRegions[prov] !== selectedRegion) return;
+
                 if (prov.includes(filter)) {
                     const item = document.createElement('div');
                     item.className = 'p-3 hover:bg-emerald-50 cursor-pointer border-b border-gray-100 text-gray-700 text-sm transition-colors';
                     item.textContent = prov;
                     item.onclick = () => {
                         selectedProvince = prov;
+                        
+                        selectedRegion = provinceRegions[prov];
+                        document.getElementById('regionSelect').value = selectedRegion;
+
                         document.getElementById('customDropdownLabel').textContent = prov;
                         document.getElementById('customDropdownMenu').classList.add('hidden');
                         renderDashboard();
@@ -340,6 +409,8 @@
             currentCrop = crop;
             document.getElementById('currentCropLabel').textContent = crop.name;
             selectedProvince = null;
+            selectedRegion = null;
+            document.getElementById('regionSelect').value = '';
 
             if (dataCache[crop.sheet]) {
                 currentRawData = dataCache[crop.sheet].data;
@@ -377,83 +448,111 @@
             const regions = result.regions || [];
             const residueTypes = result.residueTypes || [];
             const viewLabel = document.getElementById('currentViewLabel');
-            
-            // ข้อมูลสำหรับไบโอชาร์เรียงจากมากไปน้อย
-            const biocharSortedDesc = [...currentRawData].sort((a, b) => b.Biochar - a.Biochar);
 
             if (selectedProvince) {
-                // โหมดเจาะลึกรายจังหวัด
+                // --- โหมดเจาะลึก 1 จังหวัด ---
                 viewLabel.textContent = `จังหวัด: ${selectedProvince}`;
                 viewLabel.className = "font-bold text-orange-700 bg-orange-100 px-3 py-1 rounded-full";
 
                 const provData = currentRawData.find(i => i.Province === selectedProvince);
-                if (!provData) {
-                    alert(`ไม่พบข้อมูลของจังหวัด ${selectedProvince} ในพืชชนิดนี้`);
-                    return;
-                }
+                if (!provData) return;
 
-                // 1. การ์ดแถวบน: วัสดุเหลือใช้
-                document.getElementById('cardTitleTotal').textContent = `ปริมาณวัสดุเหลือใช้ของจังหวัด ${selectedProvince}`;
+                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
+                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณวัสดุเหลือใช้ของจังหวัด ${selectedProvince}`;
                 document.getElementById('sumTotal').innerHTML = `${provData.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
                 
-                document.getElementById('cardTitleMax').textContent = `อันดับปริมาณวัสดุเหลือใช้ (เทียบประเทศ)`;
-                const rankResidue = currentRawData.findIndex(i => i.Province === selectedProvince) + 1;
-                document.getElementById('sumMaxName').textContent = rankResidue > 0 ? `อันดับที่ ${rankResidue}` : "ไม่มีข้อมูล";
-                document.getElementById('sumMaxValue').textContent = `จาก 77 จังหวัด`;
-
-                const countryTotalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
-                const residuePct = countryTotalResidue > 0 ? (provData.TotalResidue / countryTotalResidue * 100).toFixed(2) : 0;
-                document.getElementById('cardTitleMin').textContent = `สัดส่วนวัสดุเหลือใช้เทียบกับทั้งประเทศ`;
-                document.getElementById('sumMinName').textContent = `${residuePct}%`;
-                document.getElementById('sumMinValue').textContent = `ของปริมาณทั่วประเทศ`;
-
-                // 2. การ์ดแถวล่าง: ไบโอชาร์
-                document.getElementById('cardTitleBiocharTotal').textContent = `ปริมาณไบโอชาร์ของจังหวัด ${selectedProvince}`;
+                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
+                document.getElementById('cardTitleBiocharTotal').textContent = `คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพของจังหวัด ${selectedProvince}`;
                 document.getElementById('sumBiocharTotal').innerHTML = `${provData.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
-                
-                document.getElementById('cardTitleBiocharMax').textContent = `อันดับปริมาณไบโอชาร์ (เทียบประเทศ)`;
-                const rankBiochar = biocharSortedDesc.findIndex(i => i.Province === selectedProvince) + 1;
-                document.getElementById('sumBiocharMaxName').textContent = rankBiochar > 0 ? `อันดับที่ ${rankBiochar}` : "ไม่มีข้อมูล";
-                document.getElementById('sumBiocharMaxValue').textContent = `จาก 77 จังหวัด`;
 
-                const countryTotalBiochar = currentRawData.reduce((sum, item) => sum + item.Biochar, 0);
-                const biocharPct = countryTotalBiochar > 0 ? (provData.Biochar / countryTotalBiochar * 100).toFixed(2) : 0;
-                document.getElementById('cardTitleBiocharMin').textContent = `สัดส่วนไบโอชาร์เทียบกับทั้งประเทศ`;
-                document.getElementById('sumBiocharMinName').textContent = `${biocharPct}%`;
-                document.getElementById('sumBiocharMinValue').textContent = `อัตราการผลิตไบโอชาร์`;
+                // 3. การ์ดอันดับ (รวม)
+                document.getElementById('cardTitleRank').textContent = `อันดับปริมาณวัสดุเหลือใช้เเละศักยภาพทางการผลิตถ่านชีวภาพ`;
+                const rank = currentRawData.findIndex(i => i.Province === selectedProvince) + 1;
+                document.getElementById('sumRankName').textContent = rank > 0 ? `อันดับที่ ${rank}` : "ไม่มีข้อมูล";
+                document.getElementById('sumRankValue').innerHTML = `จาก 77 จังหวัด`;
+
+                // 4. การ์ดสัดส่วน (รวม)
+                const countryTotalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
+                const pct = countryTotalResidue > 0 ? (provData.TotalResidue / countryTotalResidue * 100).toFixed(2) : 0;
+                document.getElementById('cardTitleMinPct').textContent = `สัดส่วนเทียบกับทั้งประเทศ`;
+                document.getElementById('sumMinPctName').textContent = `${pct}%`;
+                document.getElementById('sumMinPctValue').innerHTML = `ของปริมาณรวมทั่วประเทศ`;
 
                 renderSingleProvinceStacked(provData, residueTypes);
                 renderRegionChart(regions);
                 renderBiocharChart([provData.Province], [provData.Biochar]);
 
+            } else if (selectedRegion) {
+                // --- โหมดภาพรวมเฉพาะภูมิภาค ---
+                viewLabel.textContent = `ภูมิภาค: ${selectedRegion}`;
+                viewLabel.className = "font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-full";
+
+                const regionDataList = currentRawData.filter(i => provinceRegions[i.Province] === selectedRegion);
+                const biocharSortedDescRegion = [...regionDataList].sort((a, b) => b.Biochar - a.Biochar);
+
+                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
+                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวม ${selectedRegion}`;
+                const totalResidue = regionDataList.reduce((sum, item) => sum + item.TotalResidue, 0);
+                document.getElementById('sumTotal').innerHTML = `${totalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
+                
+                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
+                document.getElementById('cardTitleBiocharTotal').textContent = `คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวม ${selectedRegion}`;
+                const totalBiochar = regionDataList.reduce((sum, item) => sum + item.Biochar, 0);
+                document.getElementById('sumBiocharTotal').innerHTML = `${totalBiochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
+
+                // 3. การ์ดอันดับสูงสุด (รวม)
+                document.getElementById('cardTitleRank').textContent = `จังหวัดที่มีปริมาณสูงสุดอันดับ 1 (${selectedRegion})`;
+                if (regionDataList.length > 0) {
+                    document.getElementById('sumRankName').textContent = regionDataList[0].Province;
+                    document.getElementById('sumRankValue').innerHTML = `วัสดุเหลือใช้: ${regionDataList[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${regionDataList[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                } else {
+                    document.getElementById('sumRankName').textContent = "-"; document.getElementById('sumRankValue').innerHTML = "";
+                }
+
+                // 4. การ์ดอันดับน้อยสุด (รวม)
+                document.getElementById('cardTitleMinPct').textContent = `จังหวัดที่มีปริมาณน้อยที่สุด (${selectedRegion})`;
+                if (regionDataList.length > 0) {
+                    const lastItem = regionDataList[regionDataList.length - 1];
+                    document.getElementById('sumMinPctName').textContent = lastItem.Province;
+                    document.getElementById('sumMinPctValue').innerHTML = `วัสดุเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                } else {
+                    document.getElementById('sumMinPctName').textContent = "-"; document.getElementById('sumMinPctValue').innerHTML = "";
+                }
+
+                const top10 = regionDataList.slice(0, 10);
+                renderStackedChart(top10, residueTypes);
+                renderRegionChart(regions);
+
+                const top15Biochar = biocharSortedDescRegion.slice(0, 15);
+                renderBiocharChart(top15Biochar.map(i => i.Province), top15Biochar.map(i => i.Biochar));
+
             } else {
-                // โหมดภาพรวมทั้งประเทศ
+                // --- โหมดภาพรวมทั้งประเทศ ---
                 viewLabel.textContent = "ภาพรวมทั้งประเทศ";
                 viewLabel.className = "font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full";
 
-                // 1. การ์ดแถวบน: วัสดุเหลือใช้
-                document.getElementById('cardTitleTotal').textContent = "ปริมาณวัสดุเหลือใช้รวมทั้งประเทศ";
-                document.getElementById('cardTitleMax').textContent = "จังหวัดที่มีปริมาณสูงสุดอันดับ 1";
-                document.getElementById('cardTitleMin').textContent = "จังหวัดที่มีปริมาณน้อยที่สุด";
+                const biocharSortedDesc = [...currentRawData].sort((a, b) => b.Biochar - a.Biochar);
 
+                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
+                document.getElementById('cardTitleTotal').textContent = "คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวมทั้งประเทศ";
                 const totalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
                 document.getElementById('sumTotal').innerHTML = `${totalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
-                document.getElementById('sumMaxName').textContent = currentRawData[0].Province;
-                document.getElementById('sumMaxValue').textContent = `${currentRawData[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
-                document.getElementById('sumMinName').textContent = currentRawData[currentRawData.length - 1].Province;
-                document.getElementById('sumMinValue').textContent = `${currentRawData[currentRawData.length - 1].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
-
-                // 2. การ์ดแถวล่าง: ไบโอชาร์
-                document.getElementById('cardTitleBiocharTotal').textContent = "ปริมาณไบโอชาร์รวมทั้งประเทศ";
-                document.getElementById('cardTitleBiocharMax').textContent = "จังหวัดที่ผลิตไบโอชาร์สูงสุดอันดับ 1";
-                document.getElementById('cardTitleBiocharMin').textContent = "จังหวัดที่ผลิตไบโอชาร์น้อยที่สุด";
-
+                
+                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
+                document.getElementById('cardTitleBiocharTotal').textContent = "คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวมทั้งประเทศ";
                 const totalBiochar = currentRawData.reduce((sum, item) => sum + item.Biochar, 0);
                 document.getElementById('sumBiocharTotal').innerHTML = `${totalBiochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
-                document.getElementById('sumBiocharMaxName').textContent = biocharSortedDesc[0].Province;
-                document.getElementById('sumBiocharMaxValue').textContent = `${biocharSortedDesc[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
-                document.getElementById('sumBiocharMinName').textContent = biocharSortedDesc[biocharSortedDesc.length - 1].Province;
-                document.getElementById('sumBiocharMinValue').textContent = `${biocharSortedDesc[biocharSortedDesc.length - 1].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+
+                // 3. การ์ดอันดับสูงสุด (รวม)
+                document.getElementById('cardTitleRank').textContent = "จังหวัดที่มีปริมาณสูงสุดอันดับ 1";
+                document.getElementById('sumRankName').textContent = currentRawData[0].Province;
+                document.getElementById('sumRankValue').innerHTML = `วัสดุเหลือใช้: ${currentRawData[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${currentRawData[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+
+                // 4. การ์ดอันดับน้อยสุด (รวม)
+                const lastItem = currentRawData[currentRawData.length - 1];
+                document.getElementById('cardTitleMinPct').textContent = "จังหวัดที่มีปริมาณน้อยที่สุด";
+                document.getElementById('sumMinPctName').textContent = lastItem.Province;
+                document.getElementById('sumMinPctValue').innerHTML = `วัสดุเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
 
                 const top10 = currentRawData.slice(0, 10);
                 renderStackedChart(top10, residueTypes);
@@ -554,13 +653,13 @@
 
             biocharChart = new Chart(ctx, {
                 type: 'bar', 
-                data: { labels: labels, datasets: [{ label: 'ปริมาณไบโอชาร์ (ตัน)', data: data, backgroundColor: gradient, borderRadius: 6 }] },
+                data: { labels: labels, datasets: [{ label: 'ปริมาณถ่านชีวภาพ (ตัน)', data: data, backgroundColor: gradient, borderRadius: 6 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: { 
                         x: { grid: { display: false }, ticks: { font: { family: 'Sarabun', size: 10 } }, title: { display: true, text: 'จังหวัด', font: { family: 'Sarabun', weight: 'bold' } } }, 
-                        y: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { font: { family: 'Sarabun' } }, title: { display: true, text: 'ปริมาณไบโอชาร์ (ตัน)', font: { family: 'Sarabun', weight: 'bold' } } } 
+                        y: { beginAtZero: true, grid: { borderDash: [5, 5] }, ticks: { font: { family: 'Sarabun' } }, title: { display: true, text: 'ปริมาณถ่านชีวภาพ (ตัน)', font: { family: 'Sarabun', weight: 'bold' } } } 
                     }
                 }
             });
@@ -569,7 +668,12 @@
         function updateMap(data) {
             markersGroup.clearLayers();
             
-            const dataToShow = selectedProvince ? data.filter(item => item.Province === selectedProvince) : data;
+            let dataToShow = data;
+            if (selectedProvince) {
+                dataToShow = data.filter(item => item.Province === selectedProvince);
+            } else if (selectedRegion) {
+                dataToShow = data.filter(item => provinceRegions[item.Province] === selectedRegion);
+            }
 
             dataToShow.forEach(item => {
                 const coords = provinceCoords[item.Province];
@@ -583,7 +687,7 @@
                                             <span style="color: #6b7280; font-size: 13px;">ปริมาณวัสดุเหลือใช้:</span><br>
                                             <span style="color: #059669; font-weight: bold; font-size: 15px;">${item.TotalResidue.toLocaleString()} ตัน</span><br>
                                             <hr style="margin: 6px 0; border-color: #e5e7eb;">
-                                            <span style="color: #6b7280; font-size: 13px;">อัตราการผลิตไบโอชาร์:</span><br>
+                                            <span style="color: #6b7280; font-size: 13px;">ศักยภาพทางการผลิตถ่านชีวภาพ:</span><br>
                                             <span style="color: #ea580c; font-weight: bold; font-size: 14px;">${item.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน</span>
                                           </div>`;
                     
@@ -593,6 +697,8 @@
 
                     marker.on('click', () => {
                         selectedProvince = item.Province;
+                        selectedRegion = provinceRegions[item.Province]; 
+                        document.getElementById('regionSelect').value = selectedRegion;
                         document.getElementById('customDropdownLabel').textContent = item.Province;
                         
                         const searchInput = document.getElementById('innerProvinceSearch');
