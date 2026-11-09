@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละศักยภาพทางการผลิตถ่านชีวภาพ</title>
+    <title>การวิเคราะห์ชีวมวลเหลือใช้เเละศักยภาพทางการผลิตถ่านชีวภาพ</title>
     
     <!-- CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -102,7 +102,7 @@
         <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4 border border-white">
             <div>
                 <h1 class="text-2xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-700">
-                    การวิเคราะห์วัสดุเหลือใช้ทางการเกษตรเเละศักยภาพทางการผลิตถ่านชีวภาพ
+                    การวิเคราะห์ชีวมวลเหลือใช้เเละศักยภาพทางการผลิตถ่านชีวภาพ
                 </h1>
                 <p class="text-gray-600 mt-2 text-lg">
                     พืช: <span id="currentCropLabel" class="font-bold text-teal-600 bg-teal-100 px-3 py-1 rounded-full">กำลังโหลด...</span> 
@@ -118,16 +118,16 @@
             </div>
         </div>
 
-        <!-- Section 1: ข้อมูลสรุป (ยุบเหลือ 4 การ์ดใน 1 แถว) -->
+        <!-- Section 1: ข้อมูลสรุป (4 การ์ดใน 1 แถว) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <!-- 1. คาดการณ์ปริมาณวัสดุเหลือใช้ -->
+            <!-- 1. ปริมาณชีวมวลเหลือใช้ -->
             <div class="bg-gradient-to-br from-emerald-400 to-teal-600 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
-                <p id="cardTitleTotal" class="text-emerald-100 text-sm font-semibold mb-2">คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวมทั้งประเทศ</p>
+                <p id="cardTitleTotal" class="text-emerald-100 text-sm font-semibold mb-2">คาดการณ์ปริมาณชีวมวลเหลือใช้รวมทั้งประเทศ</p>
                 <h3 id="sumTotal" class="text-2xl lg:text-3xl font-bold drop-shadow-md">0 <span class="text-lg font-normal">ตัน</span></h3>
             </div>
             
-            <!-- 2. คาดการณ์ศักยภาพถ่านชีวภาพ -->
+            <!-- 2. ศักยภาพถ่านชีวภาพ -->
             <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
                 <p id="cardTitleBiocharTotal" class="text-amber-100 text-sm font-semibold mb-2">คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวมทั้งประเทศ</p>
                 <h3 id="sumBiocharTotal" class="text-2xl lg:text-3xl font-bold drop-shadow-md">0 <span class="text-lg font-normal">ตัน</span></h3>
@@ -135,14 +135,14 @@
 
             <!-- 3. อันดับปริมาณสูงสุด / อันดับของจังหวัด -->
             <div class="bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
-                <p id="cardTitleRank" class="text-rose-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณสูงสุดอันดับ 1</p>
+                <p id="cardTitleRank" class="text-rose-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณชีวมวลเหลือใช้สูงสุดอันดับ 1</p>
                 <h3 id="sumRankName" class="text-2xl font-bold drop-shadow-md">-</h3>
                 <p id="sumRankValue" class="text-red-50 mt-1 text-sm leading-relaxed whitespace-pre-line"></p>
             </div>
 
             <!-- 4. ปริมาณน้อยที่สุด / สัดส่วนเปอร์เซ็นต์ -->
             <div class="bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl p-6 shadow-lg text-white hover-card flex flex-col justify-center">
-                <p id="cardTitleMinPct" class="text-blue-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณน้อยที่สุด</p>
+                <p id="cardTitleMinPct" class="text-blue-100 text-sm font-semibold mb-2">จังหวัดที่มีปริมาณชีวมวลเหลือใช้น้อยที่สุด</p>
                 <h3 id="sumMinPctName" class="text-2xl font-bold drop-shadow-md">-</h3>
                 <p id="sumMinPctValue" class="text-indigo-50 mt-1 text-sm leading-relaxed whitespace-pre-line"></p>
             </div>
@@ -151,11 +151,11 @@
 
         <!-- Section 2: กราฟแท่งแบบซ้อน และ กราฟถ่านชีวภาพ -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- ซ้ายบน: กราฟแท่งซ้อนวัสดุเหลือใช้ -->
+            <!-- ซ้ายบน: กราฟแท่งซ้อนชีวมวลเหลือใช้ -->
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-2xl">📊</span>
-                    <h2 class="text-xl font-bold text-gray-800">เปรียบเทียบสัดส่วนประเภทวัสดุเหลือใช้</h2>
+                    <h2 class="text-xl font-bold text-gray-800">เปรียบเทียบสัดส่วนประเภทชีวมวลเหลือใช้</h2>
                 </div>
                 <div class="relative h-[350px] w-full">
                     <canvas id="stackedBarChart"></canvas>
@@ -174,27 +174,37 @@
             </div>
         </div>
 
-        <!-- Section 3: กราฟวงกลมภูมิภาค และ แผนที่ -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
-            <!-- ซ้ายล่าง: กราฟโดนัทภูมิภาค -->
+        <!-- Section 3: กราฟวงกลมภูมิภาค 2 อัน และ แผนที่ -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-8">
+            <!-- 1. ซ้าย: กราฟโดนัทภูมิภาค (ชีวมวลเหลือใช้) -->
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
                 <div class="flex items-center gap-2 mb-4">
-                    <!-- เปลี่ยนโดนัทเป็นลูกโลก -->
                     <span class="text-2xl">🌏</span>
-                    <h2 class="text-xl font-bold text-gray-800">สัดส่วนปริมาณวัสดุเหลือใช้แยกตามภูมิภาค</h2>
+                    <h2 class="text-lg font-bold text-gray-800">สัดส่วนปริมาณชีวมวลเหลือใช้<br>แยกตามภูมิภาค</h2>
                 </div>
                 <div class="relative h-[350px] w-full flex justify-center">
                     <canvas id="regionChart"></canvas>
                 </div>
             </div>
 
-            <!-- ขวาล่าง: แผนที่ -->
+            <!-- 2. กลาง: กราฟโดนัทภูมิภาค (ถ่านชีวภาพ) -->
+            <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-2xl">🔥</span>
+                    <h2 class="text-lg font-bold text-gray-800">ศักยภาพทางการผลิตถ่านชีวภาพ<br>แยกตามภูมิภาค</h2>
+                </div>
+                <div class="relative h-[350px] w-full flex justify-center">
+                    <canvas id="biocharRegionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 3. ขวา: แผนที่ -->
             <div class="bg-white/95 backdrop-blur rounded-2xl shadow-lg p-6 border border-gray-100 hover-card flex flex-col">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-2xl">🗺️</span>
-                    <h2 class="text-xl font-bold text-gray-800">แผนที่การกระจายตัว</h2>
+                    <h2 class="text-lg font-bold text-gray-800">แผนที่การกระจายตัว</h2>
                 </div>
-                <div id="map" class="flex-1 shadow-inner h-[350px]"></div>
+                <div id="map" class="flex-1 shadow-inner h-[350px] rounded-xl overflow-hidden"></div>
             </div>
         </div>
 
@@ -207,7 +217,7 @@
     <script>
         const API_URL = 'https://script.google.com/macros/s/AKfycbyHCmZniX2LSQrNYO_1FLxXTUCi2SHz31n4LTzGuEROG6apCwcNxuW0CycXs9LZ6nvg/exec';
         
-        let stackedChart = null, regionChart = null, biocharChart = null, map = null, markersGroup = null;
+        let stackedChart = null, regionChart = null, biocharChart = null, biocharRegionChart = null, map = null, markersGroup = null;
         let currentRawData = null;
         let selectedRegion = null;
         let selectedProvince = null;
@@ -445,9 +455,23 @@
         function renderDashboard() {
             if (!currentRawData) return;
             const result = dataCache[currentCrop.sheet];
-            const regions = result.regions || [];
             const residueTypes = result.residueTypes || [];
             const viewLabel = document.getElementById('currentViewLabel');
+
+            // คำนวณข้อมูลระดับภูมิภาค
+            const regAgg = { "ภาคเหนือ": 0, "ภาคตะวันออกเฉียงเหนือ": 0, "ภาคกลาง": 0, "ภาคตะวันออก": 0, "ภาคตะวันตก": 0, "ภาคใต้": 0 };
+            const bioRegAgg = { "ภาคเหนือ": 0, "ภาคตะวันออกเฉียงเหนือ": 0, "ภาคกลาง": 0, "ภาคตะวันออก": 0, "ภาคตะวันตก": 0, "ภาคใต้": 0 };
+            
+            currentRawData.forEach(item => {
+                const r = provinceRegions[item.Province];
+                if (r) {
+                    regAgg[r] += item.TotalResidue;
+                    bioRegAgg[r] += item.Biochar;
+                }
+            });
+            const regLabels = Object.keys(regAgg);
+            const regData = Object.values(regAgg);
+            const bioRegData = Object.values(bioRegAgg);
 
             if (selectedProvince) {
                 // --- โหมดเจาะลึก 1 จังหวัด ---
@@ -457,21 +481,17 @@
                 const provData = currentRawData.find(i => i.Province === selectedProvince);
                 if (!provData) return;
 
-                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
-                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณวัสดุเหลือใช้ของจังหวัด ${selectedProvince}`;
+                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณชีวมวลเหลือใช้ของจังหวัด ${selectedProvince}`;
                 document.getElementById('sumTotal').innerHTML = `${provData.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
                 
-                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
                 document.getElementById('cardTitleBiocharTotal').textContent = `คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพของจังหวัด ${selectedProvince}`;
                 document.getElementById('sumBiocharTotal').innerHTML = `${provData.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
 
-                // 3. การ์ดอันดับ (รวม)
-                document.getElementById('cardTitleRank').textContent = `อันดับปริมาณวัสดุเหลือใช้เเละศักยภาพทางการผลิตถ่านชีวภาพ`;
+                document.getElementById('cardTitleRank').textContent = `อันดับปริมาณชีวมวลเหลือใช้เเละศักยภาพทางการผลิตถ่านชีวภาพ`;
                 const rank = currentRawData.findIndex(i => i.Province === selectedProvince) + 1;
                 document.getElementById('sumRankName').textContent = rank > 0 ? `อันดับที่ ${rank}` : "ไม่มีข้อมูล";
                 document.getElementById('sumRankValue').innerHTML = `จาก 77 จังหวัด`;
 
-                // 4. การ์ดสัดส่วน (รวม)
                 const countryTotalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
                 const pct = countryTotalResidue > 0 ? (provData.TotalResidue / countryTotalResidue * 100).toFixed(2) : 0;
                 document.getElementById('cardTitleMinPct').textContent = `สัดส่วนเทียบกับทั้งประเทศ`;
@@ -479,7 +499,8 @@
                 document.getElementById('sumMinPctValue').innerHTML = `ของปริมาณรวมทั่วประเทศ`;
 
                 renderSingleProvinceStacked(provData, residueTypes);
-                renderRegionChart(regions);
+                renderRegionChart(regLabels, regData);
+                renderBiocharRegionChart(regLabels, bioRegData);
                 renderBiocharChart([provData.Province], [provData.Biochar]);
 
             } else if (selectedRegion) {
@@ -490,38 +511,35 @@
                 const regionDataList = currentRawData.filter(i => provinceRegions[i.Province] === selectedRegion);
                 const biocharSortedDescRegion = [...regionDataList].sort((a, b) => b.Biochar - a.Biochar);
 
-                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
-                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวม ${selectedRegion}`;
+                document.getElementById('cardTitleTotal').textContent = `คาดการณ์ปริมาณชีวมวลเหลือใช้รวม ${selectedRegion}`;
                 const totalResidue = regionDataList.reduce((sum, item) => sum + item.TotalResidue, 0);
                 document.getElementById('sumTotal').innerHTML = `${totalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
                 
-                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
                 document.getElementById('cardTitleBiocharTotal').textContent = `คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวม ${selectedRegion}`;
                 const totalBiochar = regionDataList.reduce((sum, item) => sum + item.Biochar, 0);
                 document.getElementById('sumBiocharTotal').innerHTML = `${totalBiochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
 
-                // 3. การ์ดอันดับสูงสุด (รวม)
-                document.getElementById('cardTitleRank').textContent = `จังหวัดที่มีปริมาณสูงสุดอันดับ 1 (${selectedRegion})`;
+                document.getElementById('cardTitleRank').textContent = `จังหวัดที่มีปริมาณชีวมวลเหลือใช้สูงสุดอันดับ 1 (${selectedRegion})`;
                 if (regionDataList.length > 0) {
                     document.getElementById('sumRankName').textContent = regionDataList[0].Province;
-                    document.getElementById('sumRankValue').innerHTML = `วัสดุเหลือใช้: ${regionDataList[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${regionDataList[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                    document.getElementById('sumRankValue').innerHTML = `ชีวมวลเหลือใช้: ${regionDataList[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${regionDataList[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
                 } else {
                     document.getElementById('sumRankName').textContent = "-"; document.getElementById('sumRankValue').innerHTML = "";
                 }
 
-                // 4. การ์ดอันดับน้อยสุด (รวม)
-                document.getElementById('cardTitleMinPct').textContent = `จังหวัดที่มีปริมาณน้อยที่สุด (${selectedRegion})`;
+                document.getElementById('cardTitleMinPct').textContent = `จังหวัดที่มีปริมาณชีวมวลเหลือใช้น้อยที่สุด (${selectedRegion})`;
                 if (regionDataList.length > 0) {
                     const lastItem = regionDataList[regionDataList.length - 1];
                     document.getElementById('sumMinPctName').textContent = lastItem.Province;
-                    document.getElementById('sumMinPctValue').innerHTML = `วัสดุเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                    document.getElementById('sumMinPctValue').innerHTML = `ชีวมวลเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
                 } else {
                     document.getElementById('sumMinPctName').textContent = "-"; document.getElementById('sumMinPctValue').innerHTML = "";
                 }
 
                 const top10 = regionDataList.slice(0, 10);
                 renderStackedChart(top10, residueTypes);
-                renderRegionChart(regions);
+                renderRegionChart(regLabels, regData);
+                renderBiocharRegionChart(regLabels, bioRegData);
 
                 const top15Biochar = biocharSortedDescRegion.slice(0, 15);
                 renderBiocharChart(top15Biochar.map(i => i.Province), top15Biochar.map(i => i.Biochar));
@@ -533,30 +551,27 @@
 
                 const biocharSortedDesc = [...currentRawData].sort((a, b) => b.Biochar - a.Biochar);
 
-                // 1. คาดการณ์ปริมาณวัสดุเหลือใช้
-                document.getElementById('cardTitleTotal').textContent = "คาดการณ์ปริมาณวัสดุเหลือใช้ทางการเกษตรรวมทั้งประเทศ";
+                document.getElementById('cardTitleTotal').textContent = "คาดการณ์ปริมาณชีวมวลเหลือใช้รวมทั้งประเทศ";
                 const totalResidue = currentRawData.reduce((sum, item) => sum + item.TotalResidue, 0);
                 document.getElementById('sumTotal').innerHTML = `${totalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
                 
-                // 2. คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพ
                 document.getElementById('cardTitleBiocharTotal').textContent = "คาดการณ์ศักยภาพทางการผลิตถ่านชีวภาพรวมทั้งประเทศ";
                 const totalBiochar = currentRawData.reduce((sum, item) => sum + item.Biochar, 0);
                 document.getElementById('sumBiocharTotal').innerHTML = `${totalBiochar.toLocaleString(undefined, {maximumFractionDigits: 0})} <span class="text-xl font-normal">ตัน</span>`;
 
-                // 3. การ์ดอันดับสูงสุด (รวม)
-                document.getElementById('cardTitleRank').textContent = "จังหวัดที่มีปริมาณสูงสุดอันดับ 1";
+                document.getElementById('cardTitleRank').textContent = "จังหวัดที่มีปริมาณชีวมวลเหลือใช้สูงสุดอันดับ 1";
                 document.getElementById('sumRankName').textContent = currentRawData[0].Province;
-                document.getElementById('sumRankValue').innerHTML = `วัสดุเหลือใช้: ${currentRawData[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${currentRawData[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                document.getElementById('sumRankValue').innerHTML = `ชีวมวลเหลือใช้: ${currentRawData[0].TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${currentRawData[0].Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
 
-                // 4. การ์ดอันดับน้อยสุด (รวม)
                 const lastItem = currentRawData[currentRawData.length - 1];
-                document.getElementById('cardTitleMinPct').textContent = "จังหวัดที่มีปริมาณน้อยที่สุด";
+                document.getElementById('cardTitleMinPct').textContent = "จังหวัดที่มีปริมาณชีวมวลเหลือใช้น้อยที่สุด";
                 document.getElementById('sumMinPctName').textContent = lastItem.Province;
-                document.getElementById('sumMinPctValue').innerHTML = `วัสดุเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
+                document.getElementById('sumMinPctValue').innerHTML = `ชีวมวลเหลือใช้: ${lastItem.TotalResidue.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน\nถ่านชีวภาพ: ${lastItem.Biochar.toLocaleString(undefined, {maximumFractionDigits: 0})} ตัน`;
 
                 const top10 = currentRawData.slice(0, 10);
                 renderStackedChart(top10, residueTypes);
-                renderRegionChart(regions);
+                renderRegionChart(regLabels, regData);
+                renderBiocharRegionChart(regLabels, bioRegData);
 
                 const top15Biochar = biocharSortedDesc.slice(0, 15);
                 renderBiocharChart(top15Biochar.map(i => i.Province), top15Biochar.map(i => i.Biochar));
@@ -621,23 +636,51 @@
             });
         }
 
-        function renderRegionChart(regions) {
+        function renderRegionChart(labels, data) {
             const ctx = document.getElementById('regionChart').getContext('2d');
             if (regionChart) regionChart.destroy();
 
             regionChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: regions.map(r => r.Region),
+                    labels: labels,
                     datasets: [{
-                        data: regions.map(r => r.Total),
+                        data: data,
                         backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'],
                         borderWidth: 2, borderColor: '#ffffff', hoverOffset: 8
                     }]
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right', labels: { font: { family: 'Sarabun' }, padding: 15 } } },
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { font: { family: 'Sarabun' }, padding: 15, boxWidth: 12 } },
+                        tooltip: { callbacks: { label: context => ` ${context.label}: ${context.parsed.toLocaleString()} ตัน` } }
+                    },
+                    cutout: '60%'
+                }
+            });
+        }
+
+        function renderBiocharRegionChart(labels, data) {
+            const ctx = document.getElementById('biocharRegionChart').getContext('2d');
+            if (biocharRegionChart) biocharRegionChart.destroy();
+
+            biocharRegionChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'],
+                        borderWidth: 2, borderColor: '#ffffff', hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { font: { family: 'Sarabun' }, padding: 15, boxWidth: 12 } },
+                        tooltip: { callbacks: { label: context => ` ${context.label}: ${context.parsed.toLocaleString()} ตัน` } }
+                    },
                     cutout: '60%'
                 }
             });
@@ -684,7 +727,7 @@
 
                     const infoContent = `<div style="font-family: 'Sarabun'; text-align: center; min-width: 140px; padding: 4px;">
                                             <b style="font-size: 16px; color: #1f2937;">${item.Province}</b><br>
-                                            <span style="color: #6b7280; font-size: 13px;">ปริมาณวัสดุเหลือใช้:</span><br>
+                                            <span style="color: #6b7280; font-size: 13px;">ปริมาณชีวมวลเหลือใช้:</span><br>
                                             <span style="color: #059669; font-weight: bold; font-size: 15px;">${item.TotalResidue.toLocaleString()} ตัน</span><br>
                                             <hr style="margin: 6px 0; border-color: #e5e7eb;">
                                             <span style="color: #6b7280; font-size: 13px;">ศักยภาพทางการผลิตถ่านชีวภาพ:</span><br>
